@@ -1,0 +1,27 @@
+{
+  "name": "biblioteca-pessoal",
+  "version": "1.0.0",
+  "description": "gerenciador de biblioteca pessoal",
+  "homepage": "https://github.com/tsaistrinta/Gerenciador-de-Biblioteca-Pessoal#readme",
+  "bugs": {
+    "url": "https://github.com/tsaistrinta/Gerenciador-de-Biblioteca-Pessoal/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsaistrinta/Gerenciador-de-Biblioteca-Pessoal.git"
+  },
+  "license": "ISC",
+  "author": "Lucas T. Strinta",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+  "build": "tsc",
+  "start": "node dist/index.js",
+  "dev": "tsx watch src/index.ts"
+},
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3",
+    "tsx": "^4.21.0"
+  }
+}

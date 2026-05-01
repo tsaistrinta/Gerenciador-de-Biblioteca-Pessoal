@@ -155,3 +155,45 @@ function listarLidos(): string[] {
 function listarPendentes(): string[] {
   return titulos.filter((_, i) => lido[i] === false);
 }
+
+function totalLivros(): number {
+  return titulos.length;
+}
+
+function totalLidos(): number {
+  return lido.filter((l) => l === true).length;
+}
+
+function percentualLidos(): number {
+  if (totalLivros() === 0) return 0;
+
+  const percentual = (totalLidos() / totalLivros()) * 100;
+  return Number(percentual.toFixed(2));
+}
+
+function mediaAvaliacoes(): number {
+  const notasDosLidos = avaliacoes.filter((_, i) => lido[i] === true);
+
+  if (notasDosLidos.length === 0) return 0;
+
+  const soma = notasDosLidos.reduce((acc, nota) => acc + nota, 0);
+  const media = soma / notasDosLidos.length;
+
+  return Number(media.toFixed(2));
+}
+
+function melhoresLivros(): string[] {
+  return titulos.filter((_, i) => avaliacoes[i] === 5);
+}
+function totalPaginasLidas(): number {
+  return paginas
+    .filter((_, i) => lido[i] === true)
+    .reduce((acc, p) => acc + p, 0);
+}
+
+console.log('\n=== ESTATISTICAS ===');
+console.log(`Total de livros: ${totalLivros()}`);
+console.log(`Livros lidos: ${totalLidos()} (${percentualLidos()}%)`);
+console.log(`Media das avaliacoes: ${mediaAvaliacoes()}`);
+console.log(`Total de paginas lidas: ${totalPaginasLidas()}`);
+console.log(`Melhores livros: ${melhoresLivros()}`);

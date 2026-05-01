@@ -224,3 +224,81 @@ function exibirPorDecada(): void {
 console.log('\n=== POR DECADA ===');
 exibirPorDecada();
 
+
+function imprimirCabecalho(titulo: string): void {
+  console.log('\n' + '='.repeat(50));
+  console.log(`  ${titulo}`);
+  console.log('='.repeat(50));
+}
+
+function imprimirSubtitulo(texto: string): void {
+  console.log(`\n--- ${texto} ---`);
+}
+
+function executarDemo(): void {
+  imprimirCabecalho('GERENCIADOR DE BIBLIOTECA PESSOAL');
+  console.log('Demonstracao completa de todas as funcionalidades');
+
+  imprimirCabecalho('1. ESTADO INICIAL DA BIBLIOTECA');
+  exibirBiblioteca();
+
+  imprimirCabecalho('2. CADASTRO E REMOCAO');
+
+  imprimirSubtitulo('Adicionando 2 livros novos');
+  adicionarLivro('O Hobbit', 'J.R.R. Tolkien', 1937, 310);
+  adicionarLivro('1984', 'George Orwell', 1949, 328);
+
+  imprimirSubtitulo('Tentando adicionar livro com ano invalido');
+  adicionarLivro('Livro Errado', 'Autor X', -100, 200);
+
+  imprimirSubtitulo('Removendo o livro do indice 8 (1984)');
+  removerLivro(8);
+
+  imprimirSubtitulo('Estado apos modificacoes');
+  exibirBiblioteca();
+
+  imprimirCabecalho('3. BUSCA E FILTROS');
+
+  imprimirSubtitulo('Buscando por "potter"');
+  console.log('Indices encontrados:', buscarPorTitulo('potter'));
+
+  imprimirSubtitulo('Buscando por "hobbit"');
+  console.log('Indices encontrados:', buscarPorTitulo('hobbit'));
+
+  imprimirSubtitulo('Listando livros de "Rowling"');
+  console.log(listarPorAutor('Rowling'));
+
+  imprimirSubtitulo('Listando livros de "Tolkien"');
+  console.log(listarPorAutor('Tolkien'));
+
+  imprimirCabecalho('4. STATUS DE LEITURA');
+
+  imprimirSubtitulo('Marcando "Ordem da Fenix" (indice 4) como lido com nota 5');
+  marcarComoLido(4, 5);
+
+  imprimirSubtitulo('Marcando "O Hobbit" (indice 7) como lido com nota 5');
+  marcarComoLido(7, 5);
+
+  imprimirSubtitulo('Tentativa invalida: nota 7');
+  marcarComoLido(0, 7);
+
+  imprimirSubtitulo('Livros lidos');
+  console.log(listarLidos());
+
+  imprimirSubtitulo('Livros pendentes');
+  console.log(listarPendentes());
+
+  imprimirCabecalho('5. ESTATISTICAS');
+  console.log(`Total de livros:        ${totalLivros()}`);
+  console.log(`Livros lidos:           ${totalLidos()} (${percentualLidos()}%)`);
+  console.log(`Media das avaliacoes:   ${mediaAvaliacoes()}`);
+  console.log(`Total de paginas lidas: ${totalPaginasLidas()}`);
+  console.log(`Melhores livros:  ${melhoresLivros()}`);
+  
+  imprimirCabecalho('6. CLASSIFICACAO POR DECADA');
+  exibirPorDecada();
+
+  imprimirCabecalho('FIM DA DEMONSTRACAO');
+}
+
+executarDemo();

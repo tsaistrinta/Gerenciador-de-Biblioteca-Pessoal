@@ -32,6 +32,7 @@ paginas.push(264, 287, 348, 624, 800, 559, 592);
 
 lido.push(true, true, true, true, false, false, false);
 
+
 avaliacoes.push(5, 4, 5, 4, 0, 0, 0);
 
 
@@ -103,18 +104,48 @@ exibirBiblioteca();
 
 }
 
-adicionarLivro('O Senhor dos Aneis', 'J.R.R. Tolkien', 1954, 1200);
-adicionarLivro('Codigo Limpo', 'Robert C. Martin', 2008, 464);
 
+function buscarPorTitulo(termo: string): number[] {
+  const termoLower = termo.toLowerCase();
+  const indicesEncontrados: number[] = [];
 
-adicionarLivro('Livro Errado', 'Autor X', -100, 200); 
-adicionarLivro('Outro Errado', 'Autor Y', 2020, 0);    
+  titulos.forEach((titulo, i) => {
+    if (titulo.toLowerCase().includes(termoLower)) {
+      indicesEncontrados.push(i);
+    }
+  });
 
-removerLivro(2);
+  return indicesEncontrados;
+}
 
-removerLivro(99);
+function listarPorAutor(autor: string): string[] {
+  const autorLower = autor.toLowerCase();
 
-console.log('\n--- Estado final ---');
+  const titulosDoAutor = titulos
+    .filter((_, i) => autores[i].toLowerCase().includes(autorLower))
+    .map((titulo) => titulo);
 
+  return titulosDoAutor;
+}
 
+// --- TESTE DA ETAPA 4 ---
 
+console.log('\n=== TESTE: buscarPorTitulo("potter") ===');
+const indicesPotter = buscarPorTitulo('potter');
+console.log('Indices encontrados:', indicesPotter);
+
+console.log('\n=== TESTE: buscarPorTitulo("PEDRA") ===');
+const indicesPedra = buscarPorTitulo('PEDRA');
+console.log('Indices encontrados:', indicesPedra);
+
+console.log('\n=== TESTE: buscarPorTitulo("xyz") (nao existe) ===');
+const indicesXyz = buscarPorTitulo('xyz');
+console.log('Indices encontrados:', indicesXyz);
+
+console.log('\n=== TESTE: listarPorAutor("rowling") ===');
+const livrosRowling = listarPorAutor('rowling');
+console.log(livrosRowling);
+
+console.log('\n=== TESTE: listarPorAutor("tolkien") (nao existe) ===');
+const livrosTolkien = listarPorAutor('tolkien');
+console.log(livrosTolkien);

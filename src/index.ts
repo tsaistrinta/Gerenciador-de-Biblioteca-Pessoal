@@ -118,6 +118,7 @@ function buscarPorTitulo(termo: string): number[] {
   return indicesEncontrados;
 }
 
+
 function listarPorAutor(autor: string): string[] {
   const autorLower = autor.toLowerCase();
 
@@ -128,24 +129,29 @@ function listarPorAutor(autor: string): string[] {
   return titulosDoAutor;
 }
 
-// --- TESTE DA ETAPA 4 ---
 
-console.log('\n=== TESTE: buscarPorTitulo("potter") ===');
-const indicesPotter = buscarPorTitulo('potter');
-console.log('Indices encontrados:', indicesPotter);
+function marcarComoLido(indice: number, avaliacao: number): void {
 
-console.log('\n=== TESTE: buscarPorTitulo("PEDRA") ===');
-const indicesPedra = buscarPorTitulo('PEDRA');
-console.log('Indices encontrados:', indicesPedra);
+  if (indice < 0 || indice >= titulos.length) {
+    console.log(`Erro: indice ${indice} invalido.`);
+    return;
+  }
 
-console.log('\n=== TESTE: buscarPorTitulo("xyz") (nao existe) ===');
-const indicesXyz = buscarPorTitulo('xyz');
-console.log('Indices encontrados:', indicesXyz);
+    if (avaliacao < 1 || avaliacao > 5) {
+  console.log('Avaliacao invalida.');
+  return;
+}
 
-console.log('\n=== TESTE: listarPorAutor("rowling") ===');
-const livrosRowling = listarPorAutor('rowling');
-console.log(livrosRowling);
+  lido[indice] = true;
+  avaliacoes[indice] = avaliacao;
 
-console.log('\n=== TESTE: listarPorAutor("tolkien") (nao existe) ===');
-const livrosTolkien = listarPorAutor('tolkien');
-console.log(livrosTolkien);
+  console.log(`Livro "${titulos[indice]}" marcado como LIDO (${avaliacao}/5).`);
+}
+
+function listarLidos(): string[] {
+  return titulos.filter((_, i) => lido[i] === true);
+}
+
+function listarPendentes(): string[] {
+  return titulos.filter((_, i) => lido[i] === false);
+}

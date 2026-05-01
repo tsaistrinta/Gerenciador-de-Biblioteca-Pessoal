@@ -185,6 +185,7 @@ function mediaAvaliacoes(): number {
 function melhoresLivros(): string[] {
   return titulos.filter((_, i) => avaliacoes[i] === 5);
 }
+
 function totalPaginasLidas(): number {
   return paginas
     .filter((_, i) => lido[i] === true)
@@ -197,3 +198,29 @@ console.log(`Livros lidos: ${totalLidos()} (${percentualLidos()}%)`);
 console.log(`Media das avaliacoes: ${mediaAvaliacoes()}`);
 console.log(`Total de paginas lidas: ${totalPaginasLidas()}`);
 console.log(`Melhores livros: ${melhoresLivros()}`);
+
+
+function exibirPorDecada(): void {
+  if (titulos.length === 0) {
+    console.log('Nenhum livro cadastrado.');
+    return;
+  }
+
+  const decadasDosLivros = anos.map((ano) => Math.floor(ano / 10) * 10);
+
+  const decadasUnicas = Array.from(new Set(decadasDosLivros)).sort(
+    (a, b) => a - b,
+  );
+
+  decadasUnicas.forEach((decada) => {
+    const titulosDaDecada = titulos.filter(
+      (_, i) => decadasDosLivros[i] === decada,
+    );
+
+    console.log(`${decada}s: ${titulosDaDecada.join(', ')}`);
+  });
+}
+
+console.log('\n=== POR DECADA ===');
+exibirPorDecada();
+
